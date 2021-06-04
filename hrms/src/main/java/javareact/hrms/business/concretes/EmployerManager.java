@@ -33,9 +33,6 @@ public class EmployerManager implements EmployerService {
 	@Override
 	public Result add(Employer employer) {
 
-		if (!this.checkIfEmployerEmpty(employer)) {
-			return new ErrorResult("Tüm alanları doldurunuz");
-		}
 		if (!this.checkIfEqualEmailAndDomain(employer.getEmail(), employer.getWebAdress())) {
 			return new ErrorResult("Email domaininizi kontrol ediniz");
 		}
@@ -55,13 +52,6 @@ public class EmployerManager implements EmployerService {
 	}
 
 	// Business Rules
-	private boolean checkIfEmployerEmpty(Employer employer) {
-		if (employer.getCompanyName() == null && employer.getWebAdress() == null && employer.getEmail() == null
-				&& employer.getPhoneNumber() == null && employer.getPassword() == null) {
-			return false;
-		}
-		return true;
-	}
 
 	private boolean checkIfEqualEmailAndDomain(String email, String website) {
 		String[] emailArr = email.split("@", 2); // @ gördüğünde böler 2 ayrı parçaya ve dizide tuttuk
@@ -72,8 +62,6 @@ public class EmployerManager implements EmployerService {
 			return true;
 		}
 		return false;
-		// baris@facebook.com.tr
-		// www.facebook.com.tr
 	}
 
 	private boolean checkIfEmailExists(String email) {

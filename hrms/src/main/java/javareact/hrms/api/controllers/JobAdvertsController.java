@@ -24,36 +24,36 @@ public class JobAdvertsController {
 		super();
 		this.jobAdvertService = jobAdvertService;
 	}
-	
+
 	@PostMapping("/add")
 	public Result add(@RequestBody JobAdvert jobAdvert) {
 		return this.jobAdvertService.add(jobAdvert);
 	}
-	
+
 	@PostMapping("/changeactivestatus")
 	public Result changeActiveStatus(@RequestParam int id) {
 		return this.jobAdvertService.changeActiveStatus(id);
 	}
-	
+
 	@GetMapping("/getall")
-	public DataResult<List<JobAdvert>> getAll(){
+	public DataResult<List<JobAdvert>> getAll() {
 		return this.jobAdvertService.getAll();
 	}
-	
+
 	@GetMapping("/getallbyemployer")
-	public DataResult<List<JobAdvert>> getAllByEmployer(@RequestParam int employerId){
+	public DataResult<List<JobAdvert>> getAllByEmployer(@RequestParam int employerId) {
 		return this.jobAdvertService.getAllByEmployer(employerId);
 	}
-	
+
 	@GetMapping("/getbyisactivated")
-	public DataResult <List<JobAdvert>> getByIsActivated(){
+	public DataResult<List<JobAdvert>> getByIsActivated() {
 		return this.jobAdvertService.getByIsActivated();
-		
+
 	}
-	
+
 	@GetMapping("/getallsortedbypublisheddate")
-	public DataResult<List<JobAdvert>> getAllSortedByPublishedDate(){
+	public DataResult<List<JobAdvert>> getAllSortedByPublishedDate() {
 		return this.jobAdvertService.getAllSortedByPublishedDate();
 	}
-	
+
 }

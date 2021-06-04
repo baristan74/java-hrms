@@ -66,6 +66,8 @@ public class JobAdvertManager implements JobAdvertService{
 		return new SuccessDataResult<List<JobAdvert>>(this.jobAdvertDao.findAll(sort));
 	}
 	
+	
+	//business rules
 	private boolean checkJobAdvertEmpty(JobAdvert jobAdvert) {
 		if(jobAdvert.getApplicationDeadline()==null && jobAdvert.getCity()==null && jobAdvert.getDescription()==null
 				&& jobAdvert.getJobPosition()==null && jobAdvert.getOpenPositionCount() == 0 ) {

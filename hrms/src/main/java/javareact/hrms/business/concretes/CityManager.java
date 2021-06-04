@@ -14,10 +14,10 @@ import javareact.hrms.dataAccess.abstracts.CityDao;
 import javareact.hrms.entities.concretes.City;
 
 @Service
-public class CityManager implements CityService{
-	
+public class CityManager implements CityService {
+
 	private CityDao cityDao;
-	
+
 	@Autowired
 	public CityManager(CityDao cityDao) {
 		super();
@@ -26,7 +26,7 @@ public class CityManager implements CityService{
 
 	@Override
 	public DataResult<List<City>> getAll() {
-		
+
 		return new SuccessDataResult<List<City>>(this.cityDao.findAll());
 	}
 
