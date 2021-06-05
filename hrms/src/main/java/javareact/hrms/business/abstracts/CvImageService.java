@@ -11,5 +11,5 @@ import javareact.hrms.entities.concretes.CvImage;
 public interface CvImageService {
 	Result add(CvImage cvImage,MultipartFile imageFile);
 	DataResult<List<CvImage>> getAll();
-	DataResult<List<CvImage>> getAllByCandidateId(int candidateId);
+	DataResult<CvImage> getByCandidateId(int candidateId);
 }

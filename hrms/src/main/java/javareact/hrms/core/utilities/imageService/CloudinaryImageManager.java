@@ -16,6 +16,7 @@ import javareact.hrms.core.utilities.results.SuccessDataResult;
 
 @Service
 public class CloudinaryImageManager implements ImageService{
+	
 	private Cloudinary cloudinary;
 
 	@Autowired 

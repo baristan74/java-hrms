@@ -6,6 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javareact.hrms.business.abstracts.CandidateService;
+import javareact.hrms.business.abstracts.CvCoverLetterService;
+import javareact.hrms.business.abstracts.CvEducationService;
+import javareact.hrms.business.abstracts.CvImageService;
+import javareact.hrms.business.abstracts.CvJobExperienceService;
+import javareact.hrms.business.abstracts.CvLanguageService;
+import javareact.hrms.business.abstracts.CvLinkService;
+import javareact.hrms.business.abstracts.CvSkillService;
 import javareact.hrms.core.utilities.adapters.mernis.UserCheckService;
 import javareact.hrms.core.utilities.results.DataResult;
 import javareact.hrms.core.utilities.results.ErrorResult;
@@ -14,18 +21,37 @@ import javareact.hrms.core.utilities.results.SuccessDataResult;
 import javareact.hrms.core.utilities.results.SuccessResult;
 import javareact.hrms.dataAccess.abstracts.CandidateDao;
 import javareact.hrms.entities.concretes.Candidate;
+import javareact.hrms.entities.dtos.CandidateCvDto;
 
 @Service
 public class CandidateManager implements CandidateService {
 
 	private CandidateDao candidateDao;
 	private UserCheckService userCheckService;
+	private CvCoverLetterService cvCoverLetterService;
+	private CvEducationService cvEducationService;
+	private CvImageService cvImageService;
+	private CvJobExperienceService cvJobExperienceService;
+	private CvLanguageService cvLanguageService;
+	private CvLinkService cvLinkService;
+	private CvSkillService cvSkillService;
 
+	
 	@Autowired
-	public CandidateManager(UserCheckService userCheckService, CandidateDao candidateDao) {
+	public CandidateManager(CandidateDao candidateDao, UserCheckService userCheckService,
+			CvCoverLetterService cvCoverLetterService, CvEducationService cvEducationService,
+			CvImageService cvImageService, CvJobExperienceService cvJobExperienceService,
+			CvLanguageService cvLanguageService, CvLinkService cvLinkService, CvSkillService cvSkillService) {
 		super();
 		this.candidateDao = candidateDao;
 		this.userCheckService = userCheckService;
+		this.cvCoverLetterService = cvCoverLetterService;
+		this.cvEducationService = cvEducationService;
+		this.cvImageService = cvImageService;
+		this.cvJobExperienceService = cvJobExperienceService;
+		this.cvLanguageService = cvLanguageService;
+		this.cvLinkService = cvLinkService;
+		this.cvSkillService = cvSkillService;
 	}
 
 	@Override
@@ -63,8 +89,23 @@ public class CandidateManager implements CandidateService {
 	}
 
 	@Override
-	public DataResult<Candidate> getById(int id) {
-		return new SuccessDataResult<>(this.candidateDao.findById(id).get());
+	public DataResult<Candidate> getById(int candidateId) {
+		return new SuccessDataResult<Candidate>(this.candidateDao.getById(candidateId));
+	}
+	
+	
+	@Override
+	public DataResult<CandidateCvDto> getCvByCandidateId(int candidateId) {
+		CandidateCvDto candidateCvDto = new CandidateCvDto();
+		candidateCvDto.setCandidate(this.getById(candidateId).getData());
+		candidateCvDto.setEducations(this.cvEducationService.getAllByCandidateIdOrderByFinishDateDesc(candidateId).getData());
+		candidateCvDto.setCoverletters(this.cvCoverLetterService.getAllByCandidateId(candidateId).getData());
+		candidateCvDto.setImage(this.cvImageService.getByCandidateId(candidateId).getData());
+		candidateCvDto.setJobExperiences(this.cvJobExperienceService.getAllByCandidateIdOrderByLeaveDateDesc(candidateId).getData());
+		candidateCvDto.setLanguages(this.cvLanguageService.getAllByCandidateId(candidateId).getData());
+		candidateCvDto.setLinks(this.cvLinkService.getAllByCandidateId(candidateId).getData());
+		candidateCvDto.setSkills(this.cvSkillService.getAllByCandidateId(candidateId).getData());
+		return new SuccessDataResult<CandidateCvDto>(candidateCvDto);
 	}
 
 	// Busines Rules
@@ -89,5 +130,7 @@ public class CandidateManager implements CandidateService {
 		}
 		return true;
 	}
+
+	
 
 }

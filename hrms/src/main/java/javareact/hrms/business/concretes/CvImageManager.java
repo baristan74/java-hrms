@@ -41,10 +41,14 @@ public class CvImageManager implements CvImageService{
 		return new SuccessDataResult<List<CvImage>>(this.cvImageDao.findAll());
 	}
 
+	
+
 	@Override
-	public DataResult<List<CvImage>> getAllByCandidateId(int candidateId) {
+	public DataResult<CvImage> getByCandidateId(int candidateId) {
 		
-		return new SuccessDataResult<List<CvImage>>(this.cvImageDao.getAllByCandidateId(candidateId));
+		return new SuccessDataResult<CvImage>(this.cvImageDao.findByCandidate_Id(candidateId));
 	}
+
+	
 
 }

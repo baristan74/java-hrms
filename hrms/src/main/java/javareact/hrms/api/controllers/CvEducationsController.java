@@ -1,13 +1,10 @@
 package javareact.hrms.api.controllers;
 
-
-
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -17,40 +14,43 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import javareact.hrms.business.abstracts.CandidateService;
-import javareact.hrms.core.utilities.results.DataResult;
+import javareact.hrms.business.abstracts.CvEducationService;
 import javareact.hrms.core.utilities.results.ErrorDataResult;
-import javareact.hrms.entities.concretes.Candidate;
-import javareact.hrms.entities.dtos.CandidateCvDto;
-
+import javareact.hrms.entities.concretes.CvEducation;
 @RestController
-@RequestMapping("/api/candidates")
-public class CandidatesController {
+@RequestMapping("/api/cveducations")
+public class CvEducationsController {
 	
-	private CandidateService candidateService;
-
-	@Autowired
-	public CandidatesController(CandidateService candidateService) {
+	private CvEducationService cvEducationService;
+	
+	
+	public CvEducationsController(CvEducationService cvEducationService) {
 		super();
-		this.candidateService = candidateService;
+		this.cvEducationService = cvEducationService;
+	}
+	
+	@PostMapping("/add")
+	public ResponseEntity<?> add(@Valid @RequestBody CvEducation cvEducation) {
+		return ResponseEntity.ok(this.cvEducationService.add(cvEducation));
 	}
 	
 	@GetMapping("/getall")
 	public ResponseEntity<?> getAll(){
-		return ResponseEntity.ok(this.candidateService.getAll());
+		return ResponseEntity.ok(this.cvEducationService.getAll());
+	}
+
+	@GetMapping("/getallbycandidateidorderbyfinishdatedesc")
+	public ResponseEntity<?> getAllByCandidateIdOrderByFinishDateDesc(@RequestParam int candidateId){
+		return ResponseEntity.ok(this.cvEducationService.getAllByCandidateIdOrderByFinishDateDesc(candidateId));
 	}
 	
-	@PostMapping("/add")
-    public ResponseEntity<?> add(@Valid @RequestBody Candidate candidate){
-        return ResponseEntity.ok(this.candidateService.add(candidate));
-    }
-	
-	@GetMapping("getcvbycandidateid")
-	public ResponseEntity<?> getCvByCandidateId(int candidateId){
-		return ResponseEntity.ok(this.candidateService.getCvByCandidateId(candidateId));
+	@GetMapping("/getallbycandidateid")
+	public ResponseEntity<?> getAllByCandidateId(@RequestParam int candidateId){
+		return ResponseEntity.ok(this.cvEducationService.getAllByCandidateId(candidateId));
 	}
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
@@ -63,6 +63,4 @@ public class CandidatesController {
 		ErrorDataResult<Object> errors = new ErrorDataResult<Object>(validationErrors);
 		return errors;
 	}
-	
-	
 }

@@ -1,7 +1,6 @@
 package javareact.hrms.api.controllers;
 
 
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,40 +16,38 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import javareact.hrms.business.abstracts.CandidateService;
-import javareact.hrms.core.utilities.results.DataResult;
+import javareact.hrms.business.abstracts.CvLanguageService;
 import javareact.hrms.core.utilities.results.ErrorDataResult;
-import javareact.hrms.entities.concretes.Candidate;
-import javareact.hrms.entities.dtos.CandidateCvDto;
+import javareact.hrms.entities.concretes.CvLanguage;
 
 @RestController
-@RequestMapping("/api/candidates")
-public class CandidatesController {
-	
-	private CandidateService candidateService;
+@RequestMapping("/api/cvlanguages")
+public class CvLanguagesController {
+	private CvLanguageService cvLanguageService;
 
 	@Autowired
-	public CandidatesController(CandidateService candidateService) {
+	public CvLanguagesController(CvLanguageService cvLanguageService) {
 		super();
-		this.candidateService = candidateService;
-	}
-	
-	@GetMapping("/getall")
-	public ResponseEntity<?> getAll(){
-		return ResponseEntity.ok(this.candidateService.getAll());
+		this.cvLanguageService = cvLanguageService;
 	}
 	
 	@PostMapping("/add")
-    public ResponseEntity<?> add(@Valid @RequestBody Candidate candidate){
-        return ResponseEntity.ok(this.candidateService.add(candidate));
-    }
+	public ResponseEntity<?> add(@Valid @RequestBody CvLanguage cvLanguage) {
+		return ResponseEntity.ok(this.cvLanguageService.add(cvLanguage));
+	}
 	
-	@GetMapping("getcvbycandidateid")
-	public ResponseEntity<?> getCvByCandidateId(int candidateId){
-		return ResponseEntity.ok(this.candidateService.getCvByCandidateId(candidateId));
+	@GetMapping("/getAll")
+	public ResponseEntity<?> getAll(){
+		return ResponseEntity.ok(this.cvLanguageService.getAll());
+	}
+	
+	@GetMapping("/getallbycandidateid")
+	public ResponseEntity<?> getAllByCandidateId(@RequestParam int candidateId){
+		return ResponseEntity.ok(this.cvLanguageService.getAllByCandidateId(candidateId));
 	}
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
@@ -63,6 +60,4 @@ public class CandidatesController {
 		ErrorDataResult<Object> errors = new ErrorDataResult<Object>(validationErrors);
 		return errors;
 	}
-	
-	
 }

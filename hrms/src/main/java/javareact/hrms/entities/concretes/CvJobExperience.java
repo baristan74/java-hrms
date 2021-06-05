@@ -13,7 +13,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -41,12 +40,9 @@ public class CvJobExperience {
     private String position;
 
     @Column(name = "start_date")
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    @NotNull
-    @NotBlank
     private LocalDate startDate;
 
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    
     @Column(name = "leave_date")
     private LocalDate leaveDate;
 

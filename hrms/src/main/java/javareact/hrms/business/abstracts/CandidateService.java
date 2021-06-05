@@ -5,6 +5,7 @@ import java.util.List;
 import javareact.hrms.core.utilities.results.DataResult;
 import javareact.hrms.core.utilities.results.Result;
 import javareact.hrms.entities.concretes.Candidate;
+import javareact.hrms.entities.dtos.CandidateCvDto;
 
 public interface CandidateService {
 	
@@ -16,7 +17,9 @@ public interface CandidateService {
 	
 	DataResult<Candidate> getByEmail(String email);
 	
-	DataResult<Candidate> getById(int id);
+	DataResult<Candidate> getById(int candidateId);
+	
+	DataResult<CandidateCvDto> getCvByCandidateId(int candidateId);
 	
 	
 	

@@ -1,7 +1,5 @@
 package javareact.hrms.api.controllers;
 
-
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,40 +15,44 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import javareact.hrms.business.abstracts.CandidateService;
-import javareact.hrms.core.utilities.results.DataResult;
+import javareact.hrms.business.abstracts.CvJobExperienceService;
 import javareact.hrms.core.utilities.results.ErrorDataResult;
-import javareact.hrms.entities.concretes.Candidate;
-import javareact.hrms.entities.dtos.CandidateCvDto;
+import javareact.hrms.entities.concretes.CvJobExperience;
 
 @RestController
-@RequestMapping("/api/candidates")
-public class CandidatesController {
+@RequestMapping("/api/cvjobexperiences")
+public class CvJobExperiencesController {
 	
-	private CandidateService candidateService;
-
+	private CvJobExperienceService cvJobExperienceService;
+	
 	@Autowired
-	public CandidatesController(CandidateService candidateService) {
+	public CvJobExperiencesController(CvJobExperienceService cvJobExperienceService) {
 		super();
-		this.candidateService = candidateService;
+		this.cvJobExperienceService = cvJobExperienceService;
+	}
+	
+	@PostMapping("/add")
+	public ResponseEntity<?> add(@Valid @RequestBody CvJobExperience cvJobExperience) {
+		return ResponseEntity.ok(this.cvJobExperienceService.add(cvJobExperience));
 	}
 	
 	@GetMapping("/getall")
 	public ResponseEntity<?> getAll(){
-		return ResponseEntity.ok(this.candidateService.getAll());
+		return ResponseEntity.ok(this.cvJobExperienceService.getAll());
 	}
 	
-	@PostMapping("/add")
-    public ResponseEntity<?> add(@Valid @RequestBody Candidate candidate){
-        return ResponseEntity.ok(this.candidateService.add(candidate));
-    }
+	@GetMapping("/getallbycandidateidorderbyleavedatedesc")
+	public ResponseEntity<?> getAllByCandidateIdOrderByLeaveDateDesc(@RequestParam int candidateId){
+		return ResponseEntity.ok(this.cvJobExperienceService.getAllByCandidateIdOrderByLeaveDateDesc(candidateId));
+	}
 	
-	@GetMapping("getcvbycandidateid")
-	public ResponseEntity<?> getCvByCandidateId(int candidateId){
-		return ResponseEntity.ok(this.candidateService.getCvByCandidateId(candidateId));
+	@GetMapping("/getallbycandidateid")
+	public ResponseEntity<?> getAllByCandidateId(@RequestParam int candidateId){
+		return ResponseEntity.ok(this.cvJobExperienceService.getAllByCandidateId(candidateId));
 	}
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
@@ -63,6 +65,4 @@ public class CandidatesController {
 		ErrorDataResult<Object> errors = new ErrorDataResult<Object>(validationErrors);
 		return errors;
 	}
-	
-	
 }
