@@ -30,21 +30,21 @@ public class CvImagesController {
 		this.candidateService = candidateService;
 	}
 	
-	@PostMapping("/add")
-	public Result add(@RequestParam(value = "id") int id, @RequestParam(value = "imageFile") MultipartFile imageFile) {
-		Candidate candidate = this.candidateService.getById(id).getData();
-		CvImage cvImage= new CvImage();
+	@PostMapping(value = "/add")
+	public Result add(@RequestParam(value = "candidateId") int candidateId, @RequestParam(value = "imageFile") MultipartFile imageFile){
+        Candidate candidate = this.candidateService.getById(candidateId).getData();
+		CvImage cvImage=new CvImage();
 		cvImage.setCandidate(candidate);
-		return this.cvImageService.add(cvImage, imageFile);
-	}
+        return this.cvImageService.add(cvImage,imageFile);
+    }
 	
 	@GetMapping("/getall")
 	public DataResult<List<CvImage>> getAll(){
 		return this.cvImageService.getAll();
 	}
 	
-	@GetMapping("getbycandidateid")
-	public DataResult<CvImage> getByCandidateId(int candidateId){
+	@GetMapping("/getbycandidateid")
+	public DataResult<CvImage> getByCandidateId(@RequestParam int candidateId){
 		return this.cvImageService.getByCandidateId(candidateId);
 	}
 }

@@ -35,10 +35,10 @@ public class JobAdvert {
 	private String description;
 	
 	@Column(name="min_salary")
-	private double minSalary;
+	private Double minSalary;
 	
 	@Column(name="max_salary")
-	private double maxSalary;
+	private Double maxSalary;
 	
 	@Column(name="open_position_count")
 	private int openPositionCount;

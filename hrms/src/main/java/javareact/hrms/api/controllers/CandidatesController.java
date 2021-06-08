@@ -21,10 +21,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import javareact.hrms.business.abstracts.CandidateService;
-import javareact.hrms.core.utilities.results.DataResult;
 import javareact.hrms.core.utilities.results.ErrorDataResult;
 import javareact.hrms.entities.concretes.Candidate;
-import javareact.hrms.entities.dtos.CandidateCvDto;
 
 @RestController
 @RequestMapping("/api/candidates")

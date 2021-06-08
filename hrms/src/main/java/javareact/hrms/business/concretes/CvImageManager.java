@@ -25,6 +25,7 @@ public class CvImageManager implements CvImageService{
 	public CvImageManager(ImageService imageService,CvImageDao cvImageDao) {
 		super();
 		this.cvImageDao = cvImageDao;
+		this.imageService=imageService;
 	}
 
 	@Override
@@ -32,7 +33,7 @@ public class CvImageManager implements CvImageService{
 		Map<String,String> uploadImage = this.imageService.uploadImageFile(imageFile).getData();
 		cvImage.setUrl(uploadImage.get("url"));
 		this.cvImageDao.save(cvImage);
-		return new SuccessResult("Image added.");
+		return new SuccessResult("Image added");
 	}
 
 	@Override
