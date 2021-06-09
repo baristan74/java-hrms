@@ -1,8 +1,10 @@
 package javareact.hrms.api.controllers;
 
-import java.util.List;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javareact.hrms.business.abstracts.CityService;
-import javareact.hrms.core.utilities.results.DataResult;
-import javareact.hrms.core.utilities.results.Result;
 import javareact.hrms.entities.concretes.City;
 
 @RestController
@@ -28,12 +28,12 @@ public class CitiesController {
 
 
 	@GetMapping("/getall")
-	public DataResult<List<City>> getAll(){
-		return this.cityService.getAll();
+	public ResponseEntity<?> getAll(){
+		return ResponseEntity.ok(this.cityService.getAll());
 	}
 	
 	@PostMapping("/add")
-	public Result add(@RequestBody City city) {
-		return this.cityService.add(city);
+	public ResponseEntity<?> add(@Valid @RequestBody City city) {
+		return ResponseEntity.ok(this.cityService.add(city));
 	}
 }

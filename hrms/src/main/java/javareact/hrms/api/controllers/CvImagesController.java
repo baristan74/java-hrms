@@ -1,8 +1,10 @@
 package javareact.hrms.api.controllers;
 
-import java.util.List;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,8 +14,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javareact.hrms.business.abstracts.CandidateService;
 import javareact.hrms.business.abstracts.CvImageService;
-import javareact.hrms.core.utilities.results.DataResult;
-import javareact.hrms.core.utilities.results.Result;
 import javareact.hrms.entities.concretes.Candidate;
 import javareact.hrms.entities.concretes.CvImage;
 @RestController
@@ -31,20 +31,20 @@ public class CvImagesController {
 	}
 	
 	@PostMapping(value = "/add")
-	public Result add(@RequestParam(value = "candidateId") int candidateId, @RequestParam(value = "imageFile") MultipartFile imageFile){
+	public ResponseEntity<?> add(@Valid @RequestParam(value = "candidateId") int candidateId, @RequestParam(value = "imageFile") MultipartFile imageFile){
         Candidate candidate = this.candidateService.getById(candidateId).getData();
 		CvImage cvImage=new CvImage();
 		cvImage.setCandidate(candidate);
-        return this.cvImageService.add(cvImage,imageFile);
+        return ResponseEntity.ok(this.cvImageService.add(cvImage,imageFile));
     }
 	
 	@GetMapping("/getall")
-	public DataResult<List<CvImage>> getAll(){
-		return this.cvImageService.getAll();
+	public ResponseEntity<?> getAll(){
+		return ResponseEntity.ok(this.cvImageService.getAll());
 	}
 	
 	@GetMapping("/getbycandidateid")
-	public DataResult<CvImage> getByCandidateId(@RequestParam int candidateId){
-		return this.cvImageService.getByCandidateId(candidateId);
+	public ResponseEntity<?> getByCandidateId(@RequestParam int candidateId){
+		return ResponseEntity.ok(this.cvImageService.getByCandidateId(candidateId));
 	}
 }

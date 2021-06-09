@@ -2,6 +2,9 @@ package javareact.hrms.api.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,8 +31,8 @@ public class JobAdvertsController {
 	}
 
 	@PostMapping("/add")
-	public Result add(@RequestBody JobAdvert jobAdvert) {
-		return this.jobAdvertService.add(jobAdvert);
+	public ResponseEntity<?> add(@Valid @RequestBody JobAdvert jobAdvert) {
+		return ResponseEntity.ok(this.jobAdvertService.add(jobAdvert));
 	}
 
 	@PostMapping("/changeactivestatus")
@@ -38,13 +41,13 @@ public class JobAdvertsController {
 	}
 
 	@GetMapping("/getall")
-	public DataResult<List<JobAdvert>> getAll() {
-		return this.jobAdvertService.getAll();
+	public ResponseEntity<?> getAll() {
+		return ResponseEntity.ok(this.jobAdvertService.getAll());
 	}
 
 	@GetMapping("/getallbyemployer")
-	public DataResult<List<JobAdvert>> getAllByEmployer(@RequestParam int employerId) {
-		return this.jobAdvertService.getAllByEmployer(employerId);
+	public ResponseEntity<?> getAllByEmployer(@RequestParam int employerId) {
+		return ResponseEntity.ok(this.jobAdvertService.getAllByEmployer(employerId));
 	}
 
 	@GetMapping("/getbyisactivated")
@@ -52,10 +55,15 @@ public class JobAdvertsController {
 		return this.jobAdvertService.getByIsActivated();
 
 	}
+	
+	@GetMapping("/getById")
+	public ResponseEntity<?>  getById(int id){
+		return ResponseEntity.ok(this.jobAdvertService.getById(id));
+	}
 
 	@GetMapping("/getallsortedbypublisheddate")
-	public DataResult<List<JobAdvert>> getAllSortedByPublishedDate() {
-		return this.jobAdvertService.getAllSortedByPublishedDate();
+	public ResponseEntity<?> getAllSortedByPublishedDate() {
+		return ResponseEntity.ok(this.jobAdvertService.getAllSortedByPublishedDate());
 	}
 
 }

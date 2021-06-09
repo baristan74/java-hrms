@@ -1,8 +1,10 @@
 package javareact.hrms.api.controllers;
 
-import java.util.List;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javareact.hrms.business.abstracts.LinkTypeService;
-import javareact.hrms.core.utilities.results.DataResult;
-import javareact.hrms.core.utilities.results.Result;
 import javareact.hrms.entities.concretes.LinkType;
 
 @RestController
@@ -26,13 +26,13 @@ public class LinkTypesController {
     }
 
     @PostMapping("/add")
-    public Result add(@RequestBody LinkType linkType){
-        return this.linkTypeService.add(linkType);
+    public ResponseEntity<?> add(@Valid @RequestBody LinkType linkType){
+        return ResponseEntity.ok(this.linkTypeService.add(linkType));
     }
 
 
     @GetMapping("/getall")
-    public DataResult<List<LinkType>> getAll(){
-        return this.linkTypeService.getAll();
+    public ResponseEntity<?> getAll(){
+        return ResponseEntity.ok(this.linkTypeService.getAll());
     }
 }

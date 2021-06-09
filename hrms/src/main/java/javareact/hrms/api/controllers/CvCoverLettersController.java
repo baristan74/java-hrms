@@ -31,17 +31,17 @@ public class CvCoverLettersController {
 		return this.cvCoverLetterService.add(cvCoverLetter);
 	}
 	@GetMapping("getall")
-	DataResult<List<CvCoverLetter>> getAll(){
+	public DataResult<List<CvCoverLetter>> getAll(){
 		return this.cvCoverLetterService.getAll();
 	}
 	
 	@GetMapping("getbyid")
-	DataResult<CvCoverLetter> getById(@RequestParam int id){
+	public DataResult<CvCoverLetter> getById(@RequestParam int id){
 		return this.cvCoverLetterService.getById(id);
 	}
 	
 	@GetMapping("getallbycandidateid")
-	DataResult<List<CvCoverLetter>> getAllByCandidateId(@RequestParam int candidateId){
+	public DataResult<List<CvCoverLetter>> getAllByCandidateId(@RequestParam int candidateId){
 		return this.cvCoverLetterService.getAllByCandidateId(candidateId);
 	}
 }

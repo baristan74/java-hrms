@@ -66,6 +66,12 @@ public class JobAdvertManager implements JobAdvertService{
 		return new SuccessDataResult<List<JobAdvert>>(this.jobAdvertDao.findAll(sort));
 	}
 	
+	@Override
+	public DataResult<JobAdvert> getById(int id) {
+		
+		return new SuccessDataResult<JobAdvert>(this.jobAdvertDao.findById(id).get());
+	}
+	
 	
 	//business rules
 	private boolean checkJobAdvertEmpty(JobAdvert jobAdvert) {
@@ -76,6 +82,8 @@ public class JobAdvertManager implements JobAdvertService{
 		}
 		return true;
 	}
+
+	
 
 	
 

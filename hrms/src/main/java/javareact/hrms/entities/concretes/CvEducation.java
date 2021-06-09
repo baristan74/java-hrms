@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-
+import javax.validation.constraints.Past;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -41,6 +41,8 @@ public class CvEducation {
     private String department_name;
 	
 	@Column(name = "start_date")
+	@Past
+	@NotNull
     private LocalDate startDate;
 	
 	

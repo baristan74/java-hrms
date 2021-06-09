@@ -9,6 +9,7 @@ import javareact.hrms.entities.concretes.JobAdvert;
 public interface JobAdvertService {
 	Result add(JobAdvert jobAdvert);
 	Result changeActiveStatus(int id);
+	DataResult<JobAdvert> getById(int id);
 	DataResult<List<JobAdvert>> getAll();
 	DataResult<List<JobAdvert>> getAllByEmployer(int employerId);
 	DataResult <List<JobAdvert>> getByIsActivated();
