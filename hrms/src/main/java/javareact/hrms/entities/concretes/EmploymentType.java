@@ -1,21 +1,19 @@
 package javareact.hrms.entities.concretes;
 
-import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,25 +22,21 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @NoArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","jobAdverts"})
 @AllArgsConstructor
-@Table(name="cv_images")
-public class CvImage {
+@Table(name = "employment_types")
+public class EmploymentType {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
+	@Column(name="id")
 	private int id;
-
-	@Column(name = "url")
-	@NotNull
+	
+	@Column(name="name")
 	@NotBlank
-	private String url;
-
-	@Column(name = "uploaded_at",columnDefinition = "DATE DEFAULT CURRENT_DATE")
-	@JsonIgnore
-	private LocalDate uploadedAt=LocalDate.now();
-
-	@OneToOne(optional=false,fetch=FetchType.LAZY)
-    @JoinColumn(name = "candidate_id")
-	@JsonBackReference
-	private Candidate candidate;
+    @NotNull
+	private String name;
+	
+	@OneToMany(mappedBy = "employmentType")
+	@JsonIgnore()
+	private List<JobAdvert> jobAdverts;
 }

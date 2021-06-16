@@ -13,6 +13,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -70,6 +71,7 @@ public class Candidate extends User {
 
 	@JsonIgnore
 	@OneToOne(mappedBy = "candidate", optional = false, fetch = FetchType.LAZY)
+	@JsonManagedReference
 	private CvImage images;
 
 	@OneToMany(mappedBy = "candidate")

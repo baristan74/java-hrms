@@ -45,7 +45,7 @@ public class JobAdvertsController {
 		return ResponseEntity.ok(this.jobAdvertService.getAll());
 	}
 
-	@GetMapping("/getallbyemployer")
+	@GetMapping("/getallbyemployerid")
 	public ResponseEntity<?> getAllByEmployer(@RequestParam int employerId) {
 		return ResponseEntity.ok(this.jobAdvertService.getAllByEmployer(employerId));
 	}
@@ -64,6 +64,21 @@ public class JobAdvertsController {
 	@GetMapping("/getallsortedbypublisheddate")
 	public ResponseEntity<?> getAllSortedByPublishedDate() {
 		return ResponseEntity.ok(this.jobAdvertService.getAllSortedByPublishedDate());
+	}
+	
+	@GetMapping("/getallbyisconfirmedbyemployee")
+	public ResponseEntity<?> getAllByIsConfirmedByEmployee(){
+		return ResponseEntity.ok(this.jobAdvertService.getAllByIsConfirmedByEmployee());
+	}
+
+	@PostMapping("/changeisconfirmedbyemployee")
+	public Result changeIsConfirmedByEmployee(@RequestParam int jobAdvertId) {
+		return this.jobAdvertService.changeIsConfirmedByEmployee(jobAdvertId);
+	}
+	
+	@GetMapping("/getallbyisconfirmedbyemployeefalse")
+	public ResponseEntity<?> getAllByIsConfirmedByEmployeeFalse(){
+		return ResponseEntity.ok(this.jobAdvertService.getAllByIsConfirmedByEmployeeFalse());
 	}
 
 }

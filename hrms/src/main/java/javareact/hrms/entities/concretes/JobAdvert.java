@@ -15,7 +15,6 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
@@ -31,7 +30,6 @@ public class JobAdvert {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@JsonIgnore
 	@Column(name="id")
 	private int id;
 	
@@ -46,6 +44,7 @@ public class JobAdvert {
 	@Column(name="max_salary")
 	private Double maxSalary;
 	
+	
 	@Min(value=1)
 	@Column(name="open_position_count")
 	private int openPositionCount;
@@ -53,7 +52,6 @@ public class JobAdvert {
 	
 	@Column(name="application_deadline")
 	@Future
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private LocalDate applicationDeadline;
 	
 	
@@ -62,7 +60,7 @@ public class JobAdvert {
 	private LocalDate publishedDate=LocalDate.now();
 	
 	@Column(name="is_activated",columnDefinition = "boolean default true")
-	private boolean isActivated=true;
+	private Boolean isActivated=true;
 	
 	@ManyToOne()
 	@JoinColumn(name="job_position_id")
@@ -75,6 +73,17 @@ public class JobAdvert {
 	@ManyToOne()
 	@JoinColumn(name="employer_id")
 	private Employer employer;
+	
+	@ManyToOne()
+	@JoinColumn(name = "working_type_id")
+	private WorkingType workingType;
+	
+	@ManyToOne()
+	@JoinColumn(name = "employment_type_id")
+	private EmploymentType employmentType;
+	
+	@Column(name="is_confirmed_by_employee",columnDefinition="boolean default false")
+	private Boolean isConfirmedByEmployee=false;
 	
 	
 }

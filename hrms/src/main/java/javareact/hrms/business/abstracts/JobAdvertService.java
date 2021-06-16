@@ -15,5 +15,10 @@ public interface JobAdvertService {
 	DataResult <List<JobAdvert>> getByIsActivated();
 	DataResult<List<JobAdvert>> getAllSortedByPublishedDate();
 	
+	DataResult<List<JobAdvert>> getAllByIsConfirmedByEmployee();
+
+	Result changeIsConfirmedByEmployee(int jobAdvertId);
+	
+	DataResult<List<JobAdvert>> getAllByIsConfirmedByEmployeeFalse();
 	
 }

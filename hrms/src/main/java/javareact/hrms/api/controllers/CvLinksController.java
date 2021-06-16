@@ -18,6 +18,7 @@ import javareact.hrms.entities.concretes.CvLink;
 @RestController
 @RequestMapping("/api/cvlinks")
 public class CvLinksController {
+	
 	private CvLinkService cvLinkService;
 
 	@Autowired
