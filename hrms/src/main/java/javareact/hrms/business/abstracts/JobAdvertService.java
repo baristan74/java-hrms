@@ -21,4 +21,6 @@ public interface JobAdvertService {
 	
 	DataResult<List<JobAdvert>> getAllByIsConfirmedByEmployeeFalse();
 	
+	DataResult<List<JobAdvert>> getAllByActiveAndPagination(int pageNumber);
+	
 }

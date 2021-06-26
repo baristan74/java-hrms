@@ -2,6 +2,7 @@ package javareact.hrms.dataAccess.abstracts;
 
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -20,6 +21,9 @@ public interface JobAdvertDao extends JpaRepository<JobAdvert,Integer>{
 	
 	@Query("From JobAdvert where is_confirmed_by_employee=false Order By published_date DESC")
 	List<JobAdvert> getAllByIsConfirmedByEmployeeFalse();
+	
+	@Query("From JobAdvert where is_confirmed_by_employee=true AND is_activated=true Order By published_date DESC")
+	List<JobAdvert> getAllByIsConfirmedByEmployee(Pageable pageable);
 	
 	
 	

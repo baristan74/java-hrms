@@ -80,5 +80,10 @@ public class JobAdvertsController {
 	public ResponseEntity<?> getAllByIsConfirmedByEmployeeFalse(){
 		return ResponseEntity.ok(this.jobAdvertService.getAllByIsConfirmedByEmployeeFalse());
 	}
+	
+	@GetMapping("/getallbyactiveandpagination")
+	public ResponseEntity<?> getAllByActiveAndPagination(@RequestParam int pageNumber){
+		return ResponseEntity.ok(this.jobAdvertService.getAllByActiveAndPagination(pageNumber));
+	}
 
 }

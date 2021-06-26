@@ -3,6 +3,8 @@ package javareact.hrms.business.concretes;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -95,6 +97,12 @@ public class JobAdvertManager implements JobAdvertService {
 		
 		return new SuccessDataResult<List<JobAdvert>>(this.jobAdvertDao.getAllByIsConfirmedByEmployeeFalse());
 	}
+	
+	@Override
+	public DataResult<List<JobAdvert>> getAllByActiveAndPagination(int pageNumber) {
+		Pageable page = PageRequest.of(pageNumber-1, 10);
+		return new SuccessDataResult<List<JobAdvert>>(this.jobAdvertDao.getAllByIsConfirmedByEmployee(page));
+	}
 
 	// business rules
 	private boolean checkJobAdvertEmpty(JobAdvert jobAdvert) {
@@ -105,6 +113,8 @@ public class JobAdvertManager implements JobAdvertService {
 		}
 		return true;
 	}
+
+	
 
 	
 
