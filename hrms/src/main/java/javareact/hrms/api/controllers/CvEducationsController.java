@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +25,7 @@ import javareact.hrms.core.utilities.results.ErrorDataResult;
 import javareact.hrms.entities.concretes.CvEducation;
 @RestController
 @RequestMapping("/api/cveducations")
+@CrossOrigin
 public class CvEducationsController {
 	
 	private CvEducationService cvEducationService;

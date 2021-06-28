@@ -3,8 +3,10 @@ package javareact.hrms.api.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,11 +14,13 @@ import javareact.hrms.business.abstracts.CvSkillService;
 import javareact.hrms.core.utilities.results.DataResult;
 import javareact.hrms.core.utilities.results.Result;
 import javareact.hrms.entities.concretes.CvSkill;
+
 @RestController
 @RequestMapping("/api/cvskills")
+@CrossOrigin
 public class CvSkillsController {
 	private CvSkillService cvSkillService;
-	
+
 	@Autowired
 	public CvSkillsController(CvSkillService cvSkillService) {
 		super();
@@ -24,17 +28,22 @@ public class CvSkillsController {
 	}
 
 	@PostMapping("/add")
-	public Result add(CvSkill cvSkill) {
+	public Result add(@RequestBody CvSkill cvSkill) {
 		return this.cvSkillService.add(cvSkill);
 	}
-	
+
 	@GetMapping("/getall")
-    public DataResult<List<CvSkill>> getAll(){
+	public DataResult<List<CvSkill>> getAll() {
 		return this.cvSkillService.getAll();
 	}
-	
+
 	@GetMapping("/getallbycandidateid")
-    public DataResult<List<CvSkill>> getAllByCandidateId(int candidateId){
-    	return this.cvSkillService.getAllByCandidateId(candidateId);
-    }
+	public DataResult<List<CvSkill>> getAllByCandidateId(int candidateId) {
+		return this.cvSkillService.getAllByCandidateId(candidateId);
+	}
+
+	@PostMapping("/delete")
+	public Result delete(@RequestBody CvSkill cvSkill) {
+		return this.cvSkillService.delete(cvSkill);
+	}
 }

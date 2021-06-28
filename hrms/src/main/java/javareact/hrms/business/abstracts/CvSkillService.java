@@ -8,6 +8,8 @@ import javareact.hrms.entities.concretes.CvSkill;
 
 public interface CvSkillService {
 	Result add(CvSkill cvSkill);
+	Result delete(CvSkill cvSkill);
+	
     DataResult<List<CvSkill>> getAll();
     DataResult<List<CvSkill>> getAllByCandidateId(int candidateId);
 }

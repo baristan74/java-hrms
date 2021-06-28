@@ -38,7 +38,7 @@ public class CvEducation {
 	@Column(name = "department_name")
     @NotNull
     @NotBlank
-    private String department_name;
+    private String departmentName;
 	
 	@Column(name = "start_date")
 	@Past

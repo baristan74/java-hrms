@@ -44,5 +44,10 @@ public class CandidatesController {
 		return ResponseEntity.ok(this.candidateService.getCvByCandidateId(candidateId));
 	}
 	
+	@GetMapping("/getbyid")
+	public ResponseEntity<?> getById(int candidateId){
+		return ResponseEntity.ok(this.candidateService.getById(candidateId));
+	}
+	
 	
 }
