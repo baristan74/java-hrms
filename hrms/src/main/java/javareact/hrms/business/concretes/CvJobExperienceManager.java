@@ -46,5 +46,11 @@ public class CvJobExperienceManager implements CvJobExperienceService{
 		
 		return new SuccessDataResult<List<CvJobExperience>>(this.cvJobExperienceDao.getAllByCandidateId(candidateId));
 	}
+
+	@Override
+	public Result delete(CvJobExperience cvJobExperience) {
+		this.cvJobExperienceDao.delete(cvJobExperience);
+		return new SuccessResult();
+	}
 	
 }

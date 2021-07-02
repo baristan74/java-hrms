@@ -5,6 +5,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +18,7 @@ import javareact.hrms.entities.concretes.CvJobExperience;
 
 @RestController
 @RequestMapping("/api/cvjobexperiences")
+@CrossOrigin
 public class CvJobExperiencesController {
 	
 	private CvJobExperienceService cvJobExperienceService;
@@ -45,6 +47,11 @@ public class CvJobExperiencesController {
 	@GetMapping("/getallbycandidateid")
 	public ResponseEntity<?> getAllByCandidateId(@RequestParam int candidateId){
 		return ResponseEntity.ok(this.cvJobExperienceService.getAllByCandidateId(candidateId));
+	}
+	
+	@PostMapping("/delete")
+	public ResponseEntity<?> delete(@RequestBody CvJobExperience cvJobExperience) {
+		return ResponseEntity.ok(this.cvJobExperienceService.delete(cvJobExperience));
 	}
 	
 }

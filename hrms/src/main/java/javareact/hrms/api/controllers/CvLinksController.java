@@ -1,8 +1,8 @@
 package javareact.hrms.api.controllers;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,12 +11,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javareact.hrms.business.abstracts.CvLinkService;
-import javareact.hrms.core.utilities.results.DataResult;
-import javareact.hrms.core.utilities.results.Result;
 import javareact.hrms.entities.concretes.CvLink;
 
 @RestController
 @RequestMapping("/api/cvlinks")
+@CrossOrigin
 public class CvLinksController {
 	
 	private CvLinkService cvLinkService;
@@ -28,18 +27,23 @@ public class CvLinksController {
 	}
 	
 	@PostMapping("/add")
-	public Result add(@RequestBody CvLink cvLink) {
-		return this.cvLinkService.add(cvLink);
+	public ResponseEntity<?> add(@RequestBody CvLink cvLink) {
+		return ResponseEntity.ok(this.cvLinkService.add(cvLink));
 	}
 	
 	@GetMapping("/getall")
-	public DataResult<List<CvLink>> getAll(){
-		return this.cvLinkService.getAll();
+	public ResponseEntity<?> getAll(){
+		return ResponseEntity.ok(this.cvLinkService.getAll()) ;
 	}
 	
-	@GetMapping("getallbycandidateId")
-	public DataResult<List<CvLink>> getAllByCandidateId(@RequestParam int candidateId){
-		return this.cvLinkService.getAllByCandidateId(candidateId);
+	@GetMapping("/getallbycandidateId")
+	public ResponseEntity<?> getAllByCandidateId(@RequestParam int candidateId){
+		return ResponseEntity.ok(this.cvLinkService.getAllByCandidateId(candidateId));
+	}
+	
+	@PostMapping("/delete")
+	public ResponseEntity<?> delete(@RequestBody CvLink cvLink) {
+		return ResponseEntity.ok(this.cvLinkService.delete(cvLink));
 	}
 	
 

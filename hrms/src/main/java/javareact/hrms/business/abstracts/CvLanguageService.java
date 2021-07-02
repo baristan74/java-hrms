@@ -10,4 +10,5 @@ public interface CvLanguageService {
 	Result add(CvLanguage cvLanguage);
 	DataResult<List<CvLanguage>> getAll();
 	DataResult<List<CvLanguage>> getAllByCandidateId(int candidateId);
+	Result delete(CvLanguage cvLanguage);
 }

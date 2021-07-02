@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +19,7 @@ import javareact.hrms.entities.concretes.CvLanguage;
 
 @RestController
 @RequestMapping("/api/cvlanguages")
+@CrossOrigin
 public class CvLanguagesController {
 	private CvLanguageService cvLanguageService;
 
@@ -40,5 +42,10 @@ public class CvLanguagesController {
 	@GetMapping("/getallbycandidateid")
 	public ResponseEntity<?> getAllByCandidateId(@RequestParam int candidateId){
 		return ResponseEntity.ok(this.cvLanguageService.getAllByCandidateId(candidateId));
+	}
+	
+	@PostMapping("/delete")
+	public ResponseEntity<?> delete(@RequestBody CvLanguage cvLanguage) {
+		return ResponseEntity.ok(this.cvLanguageService.delete(cvLanguage));
 	}
 }

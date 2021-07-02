@@ -46,4 +46,10 @@ public class CvEducationManager implements CvEducationService{
 		
 		return new SuccessDataResult<List<CvEducation>>(this.cvEducationDao.getAllByCandidateId(candidateId));
 	}
+
+	@Override
+	public Result delete(CvEducation cvEducation) {
+		this.cvEducationDao.delete(cvEducation);
+		return new SuccessResult("School deleted");
+	}
 }

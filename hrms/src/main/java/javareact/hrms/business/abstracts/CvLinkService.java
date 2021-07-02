@@ -10,4 +10,5 @@ public interface CvLinkService {
 	Result add(CvLink cvLink);
     DataResult<List<CvLink>> getAll();
     DataResult<List<CvLink>> getAllByCandidateId(int candidateId);
+    Result delete(CvLink cvLink);
 }

@@ -9,6 +9,8 @@ import javareact.hrms.entities.concretes.CvEducation;
 public interface CvEducationService {
 	
 	Result add(CvEducation cvEducation);
+	
+	Result delete(CvEducation cvEducation);
 
 	DataResult<List<CvEducation>> getAll();
 

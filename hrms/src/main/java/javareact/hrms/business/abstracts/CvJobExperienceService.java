@@ -11,4 +11,5 @@ public interface CvJobExperienceService {
 	DataResult<List<CvJobExperience>> getAll();
 	DataResult<List<CvJobExperience>> getAllByCandidateIdOrderByLeaveDateDesc(int candidateId);
 	DataResult<List<CvJobExperience>> getAllByCandidateId(int candidateId);
+	Result delete(CvJobExperience cvJobExperience);
 }

@@ -40,4 +40,10 @@ public class CvLanguageManager implements CvLanguageService {
 		
 		return new SuccessDataResult<List<CvLanguage>>(this.cvLanguageDao.getAllByCandidateId(candidateId));
 	}
+
+	@Override
+	public Result delete(CvLanguage cvLanguage) {
+		this.cvLanguageDao.delete(cvLanguage);
+		return new SuccessResult();
+	}
 }
