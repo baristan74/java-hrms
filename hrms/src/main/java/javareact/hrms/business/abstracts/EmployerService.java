@@ -8,7 +8,15 @@ import javareact.hrms.entities.concretes.Employer;
 
 public interface EmployerService {
 	DataResult<List<Employer>> getAll();
+
 	Result add(Employer employer);
+
 	DataResult<Employer> getByEmail(String email);
+
+	DataResult<List<Employer>> getAllByConfirmed();
+
+	Result changeIsConfirmedByEmployee(int employerId);
 	
+	DataResult<Employer> getById(int employerId);
+
 }

@@ -1,33 +1,33 @@
 package javareact.hrms.entities.concretes;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-@Data
 @Entity
+@EqualsAndHashCode(callSuper = false)
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler","jobAdverts"})
-@EqualsAndHashCode(callSuper = false)
-@PrimaryKeyJoinColumn(name = "id")
-@Table(name="employers")
-public class Employer extends User{
+@Table(name="employer_update_confirm_by_employees")
+public class EmployerUpdateConfirmByEmployee {
+	
+	@Id
+    @Column(name="id")
+	private int id;
 	
 	@NotNull
 	@NotBlank
@@ -39,23 +39,27 @@ public class Employer extends User{
 	@Column(name="web_adress")
 	private String webAdress;
 	
+	@NotBlank
+	@NotNull
+	@Email
+	@Column(name="email")
+	private String email;
+	
 	@NotNull
 	@NotBlank
 	@Column(name="phone_number")
 	private String phoneNumber;
 	
-	
-	@Column(name="is_activated", columnDefinition = "boolean default true")
-	private boolean isActivated=true;
-	
-	@Column(name = "is_confirm_by_employee", columnDefinition = "boolean default false")
-	private boolean isConfirmByEmployee = false;
+	@Column(name="password")
+	private String password;
 	
 	@Column(name = "created_at", columnDefinition = "Date default CURRENT_DATE")
 	@JsonIgnore
 	private LocalDateTime createdAt = LocalDateTime.now();
 	
-	@OneToMany(mappedBy="employer")
-	@JsonIgnore
-	private List<JobAdvert> jobAdverts;
+	@Column(name = "is_confirm_by_employee", columnDefinition = "boolean default false")
+	private boolean isConfirmByEmployee = false;
+	
+	@Column(name="is_activated", columnDefinition = "boolean default true")
+	private boolean isActivated=true;
 }

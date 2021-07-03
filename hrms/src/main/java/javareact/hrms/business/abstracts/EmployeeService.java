@@ -7,6 +7,10 @@ import javareact.hrms.core.utilities.results.Result;
 import javareact.hrms.entities.concretes.Employee;
 
 public interface EmployeeService {
+	
 	Result add(Employee employee);
+
 	DataResult<List<Employee>> getAll();
+
+	DataResult<Employee> getById(int employeeId);
 }

@@ -36,9 +36,9 @@ public class EmployerManager implements EmployerService {
 		if (!this.checkIfEqualEmailAndDomain(employer.getEmail(), employer.getWebAdress())) {
 			return new ErrorResult("Email domaininizi kontrol ediniz");
 		}
-		if (!this.checkIfEmailExists(employer.getEmail())) {
-			return new ErrorResult("Bu Email adresi zaten mevcut");
-		}
+		//if (!this.checkIfEmailExists(employer.getEmail())) {
+		//	return new ErrorResult("Bu Email adresi zaten mevcut");
+		//}
 
 		this.employerDao.save(employer);
 		return new SuccessResult("Employer Added");
@@ -49,6 +49,26 @@ public class EmployerManager implements EmployerService {
 	public DataResult<Employer> getByEmail(String email) {
 
 		return new SuccessDataResult<Employer>(this.employerDao.getByEmail(email));
+	}
+	
+	@Override
+	public DataResult<List<Employer>> getAllByConfirmed() {
+		
+		return new SuccessDataResult<List<Employer>>(this.employerDao.getAllByConfirmed());
+	}
+
+	@Override
+	public Result changeIsConfirmedByEmployee(int employerId) {
+		Employer employerIsConfirmByEmployee = this.employerDao.findById(employerId).get();
+		employerIsConfirmByEmployee.setConfirmByEmployee(true);
+		this.employerDao.save(employerIsConfirmByEmployee);
+		return new SuccessResult("Şirket doğrulama durumu değiştirildi");
+	}
+	
+	@Override
+	public DataResult<Employer> getById(int employerId) {
+		
+		return new SuccessDataResult<Employer>(this.employerDao.findById(employerId).orElse(null));
 	}
 
 	// Business Rules
@@ -70,5 +90,9 @@ public class EmployerManager implements EmployerService {
 		}
 		return true;
 	}
+
+	
+
+
 
 }
