@@ -7,3 +7,6 @@
 - Spring Data JPA
 - PostgreSQL Driver
 - Lombok
+- Swagger
+- Cloudinary
+- Hibernate
